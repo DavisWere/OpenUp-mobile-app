@@ -46,11 +46,13 @@ Therapists can also sign up on OpenUp to offer their services, providing users w
    ```bash
    npx expo start
    ```
-   if you get the error 'The term 'expo' is not recognized..'
+   if you get the error "The term 'expo' is not recognized.."
    ```bash
    npm install -g expo-cli
    ```
-   after install try restarting expo
+   This updates expo-cli version or reinstalls it. Also ensure you've set the npm path in the environment variables to avoid the error.
+   
+   After install try restarting expo
 
-2. - Use an emulator/simulator to run the app (iOS/Android).
+3. - Use an emulator/simulator to run the app (iOS/Android).
    - Scan the QR code with the Expo Go app on your mobile device to run the app on your phone.
