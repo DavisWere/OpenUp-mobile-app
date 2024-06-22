@@ -27,7 +27,7 @@ Therapists can also sign up on OpenUp to offer their services, providing users w
 
    ```bash
    git clone https://github.com/your-username/OpenUp.git
-   cd OpenUp-mobile-app/OpenUpMobile
+   cd OpenUp-mobile-app
 
    ```
 
