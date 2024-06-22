@@ -1,50 +1,56 @@
-# Welcome to your Expo app 👋
+# OpenUp
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+OpenUp is a mobile app designed to support your mental health journey with a variety of features aimed at enhancing well-being and providing support.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Booking Sessions with Therapists:** Schedule appointments with licensed therapists conveniently through the app.
+- **AI Chatbot:** Get guidance and support in your mental health journey through an AI-powered chatbot that offers personalized assistance.
+- **Community Interaction:** Connect with others in a supportive community environment to share experiences and provide mutual support.
+- **Resources:** Access a library of mental health resources in PDF or video format to learn more about mental well-being and coping strategies.
+- **Games:** Engage in relaxing and enjoyable games designed to reduce stress and improve mental health.
+- **Quick Tips:** Receive concise tips and suggestions to help manage stress and improve mental well-being in daily life.
+
+Therapists can also sign up on OpenUp to offer their services, providing users with a diverse network of professionals to choose from.
+
+## Installation
+
+### Prerequisites
+
+- Node.js
+- npm (Node Package Manager) or Yarn
+- Expo CLI (install with `npm install -g expo-cli`)
+
+### Clone Repository
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/OpenUp.git
+   cd OpenUp-mobile-app/OpenUpMobile
+
+   ```
+
+2. Install dependencies:
 
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the app
+## Usage
+
+1. Start the Expo development server:
 
    ```bash
-    npx expo start
+   npx expo start
    ```
+   if you get the error 'The term 'expo' is not recognized..'
+   ```bash
+   npm install -g expo-cli
+   ```
+   after install try restarting expo
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+2. - Use an emulator/simulator to run the app (iOS/Android).
+   - Scan the QR code with the Expo Go app on your mobile device to run the app on your phone.
