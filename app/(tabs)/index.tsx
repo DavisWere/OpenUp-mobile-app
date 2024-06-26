@@ -1,12 +1,26 @@
-import { View, Text } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Community from '../../components/screens/Community';
+import Therapists from '../../components/screens/Therapists';
+import { RootStackParamList } from '../../components/types';
+import Toast, { BaseToast } from 'react-native-toast-message';
 
-export default function HomeScreen() {
+const Stack = createStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator();
+
+const App: React.FC = () => {
   return (
-    <>
-     <View style={[globalStyles.Secondary, {flex: 1}] }>
-      <Text>Screens shown after sign in</Text>
-     </View>
-    </>
+    
+      <Tab.Navigator>
+        <Tab.Screen name="Community" component={Community} />
+        <Tab.Screen name="Therapists" component={Therapists} />
+      </Tab.Navigator>
+      
+    
   );
-}
+};
+
+export default App;
