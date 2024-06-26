@@ -15,7 +15,6 @@ const Home: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* Your Home Screen Content */}
       <Button title="Community" onPress={navigateToCommunity} />
       <Button title="Therapists" onPress={navigateToTherapists} />
     </View>

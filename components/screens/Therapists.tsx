@@ -11,9 +11,9 @@ const Therapists: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const therapistsData = [
-    { id: '1', name: 'Dr. Sarah Migada', specialization: 'Psychologist', image: 'https://via.placeholder.com/100' },
-    { id: '2', name: 'Dr. Sarah Achieng ', specialization: 'Counselor', image: 'https://via.placeholder.com/100' },
-    { id: '3', name: 'Dr. sarah Migada', specialization: 'Therapist', image: 'https://via.placeholder.com/100' },
+    { id: '1', name: 'Dr. John Doe', specialization: 'Psychologist', image: 'https://via.placeholder.com/100' },
+    { id: '2', name: 'Dr. Jane Smith', specialization: 'Counselor', image: 'https://via.placeholder.com/100' },
+    { id: '3', name: 'Dr. Michael Brown', specialization: 'Therapist', image: 'https://via.placeholder.com/100' },
   ];
 
   const filteredTherapists = therapistsData.filter(therapist =>
@@ -58,6 +58,7 @@ const Therapists: React.FC = () => {
   };
 
   const handleBookingConfirmed = () => {
+    // Show toast message
     Toast.show({
       type: 'success',
       text1: 'Session Booked',
@@ -69,59 +70,57 @@ const Therapists: React.FC = () => {
     <View style={styles.itemContainer}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>{item.name}</Text>
+        <Text style={[styles.name, { color: '#888' }]}>{item.name}</Text>
         <Text style={styles.specialization}>{item.specialization}</Text>
       </View>
+      <TouchableOpacity onPress={handleBookSession} style={styles.bookButton}>
+        <Text style={styles.bookButtonText}>Book Session</Text>
+      </TouchableOpacity>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search Therapists"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />
-      </View>
-
+      <Text style={styles.header}>Therapists</Text>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search Therapists"
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+      />
       <FlatList
         data={filteredTherapists}
         renderItem={renderTherapistItem}
         keyExtractor={item => item.id}
         style={styles.list}
       />
-
-      <TouchableOpacity onPress={showDatePicker} style={styles.dateButton}>
-        <Text style={styles.dateButtonText}>
-          {selectedDate ? `Selected Date: ${selectedDate}` : 'Select Date'}
-        </Text>
+      {/* Select Date Button */}
+      <TouchableOpacity onPress={showDatePicker} style={styles.selectDateButton}>
+        <Text style={styles.selectDateButtonText}>Select Date</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity onPress={showTimePicker} style={styles.timeButton}>
-        <Text style={styles.timeButtonText}>
-          {selectedTime ? `Selected Time: ${selectedTime}` : 'Select Time'}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleBookSession} style={styles.bookButtonBottom}>
-        <Text style={styles.bookButtonText}>Book Session</Text>
-      </TouchableOpacity>
-
+      {/* Date Time Picker for Date */}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirmDate}
         onCancel={hideDatePicker}
       />
+      {/* Display Selected Date */}
+      {selectedDate && <Text style={styles.selectedText}>Selected Date: {selectedDate}</Text>}
 
+      {/* Select Time Button */}
+      <TouchableOpacity onPress={showTimePicker} style={styles.selectTimeButton}>
+        <Text style={styles.selectTimeButtonText}>Select Time</Text>
+      </TouchableOpacity>
+      {/* Date Time Picker for Time */}
       <DateTimePickerModal
         isVisible={isTimePickerVisible}
         mode="time"
         onConfirm={handleConfirmTime}
         onCancel={hideTimePicker}
       />
+      {/* Display Selected Time */}
+      {selectedTime && <Text style={styles.selectedText}>Selected Time: {selectedTime}</Text>}
     </View>
   );
 };
@@ -131,21 +130,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   searchInput: {
-    flex: 1,
     height: 40,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 8,
+    marginBottom: 20,
     paddingLeft: 10,
   },
   list: {
-    flexGrow: 1,
+    width: '100%',
   },
   itemContainer: {
     backgroundColor: '#f0f0f0',
@@ -172,34 +171,38 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#888',
   },
-  bookButtonBottom: {
+  bookButton: {
     backgroundColor: '#4caf50',
     padding: 10,
     borderRadius: 8,
+  },
+  bookButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  selectDateButton: {
+    backgroundColor: '#000',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 20,
+  },
+  selectDateButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  selectTimeButton: {
+    backgroundColor: '#000',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 20,
+  },
+  selectTimeButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  selectedText: {
     marginTop: 10,
-    alignItems: 'center',
-  },
-  dateButton: {
-    backgroundColor: '#4caf50',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  dateButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  timeButton: {
-    backgroundColor: '#4caf50',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  timeButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 

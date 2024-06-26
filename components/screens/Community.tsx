@@ -21,7 +21,7 @@ const Community = () => {
       </ScrollView>
       <View style={styles.createNewPost}>
         <Text style={styles.createPostText}>Create New Post</Text>
-        {}
+        {/* new post */}
       </View>
     </View>
   );
