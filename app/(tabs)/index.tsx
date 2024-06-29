@@ -1,38 +1,17 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Community from '../../components/screens/Community';
-import Therapists from '../../components/screens/Therapists';
-import { RootStackParamList } from '../../components/types';
-import Toast, { BaseToast } from 'react-native-toast-message';
-
-const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
-
-const App: React.FC = () => {
-  return (
-    
-      <Tab.Navigator>
-        <Tab.Screen name="Community" component={Community} />
-        <Tab.Screen name="Therapists" component={Therapists} />
-      </Tab.Navigator>
-      
-    
-=======
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Home from '@/components/Home';
-import AIchat from '@/components/AIchat';
-import Profile from '@/components/Profile';
-import Messages from '@/components/Messages';
 import Resources from '@/components/Resources';
+import AIchat from '@/components/AIchat';
+import Messages from '@/components/Messages';
+import Profile from '@/components/Profile';
 
-import Therapists from "@/components/screens/Therapists";
-import Appointments from "@/components/screens/Appointments";
-import Community from "@/components/screens/Community";
+import Community from '../../components/screens/Community';
+import Therapists from '../../components/screens/Therapists';
+import Appointments from '../../components/screens/Appointments';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import CustomHeader from './CustomHeader';
 import { Ionicons } from '@expo/vector-icons';
@@ -96,5 +75,3 @@ export default function HomeScreen() {
       </Tab.Navigator>
   );
 };
-
-export default App;

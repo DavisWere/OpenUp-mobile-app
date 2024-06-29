@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput, A
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Toast from 'react-native-toast-message';
 
-const Therapists: React.FC = () => {
+const Therapists = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -207,3 +207,4 @@ const styles = StyleSheet.create({
 });
 
 export default Therapists;
+
