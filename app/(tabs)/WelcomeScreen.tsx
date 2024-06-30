@@ -9,7 +9,7 @@ const WelcomeScreen = () => {
   const navigation = useNavigation();
 
   const handleGoogleLogin = () => {
-    Linking.openURL('https://accounts.google.com');
+    Linking.openURL('https://accounts.google.com/');
   };
 
   const handleFacebookLogin = () => {
@@ -17,11 +17,11 @@ const WelcomeScreen = () => {
   };
 
   const handleSignUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('SignUp'); // Navigate to SignUp screen
   };
 
   const handleLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('Login'); // Navigate to Login screen
   };
 
   return (
@@ -73,3 +73,4 @@ const WelcomeScreen = () => {
 };
 
 export default WelcomeScreen;
+
