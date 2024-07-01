@@ -1,77 +1,113 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-
+import { View, Text } from 'react-native';
 import Home from '@/components/Home';
 import Resources from '@/components/Resources';
 import AIchat from '@/components/AIchat';
-import Messages from '@/components/Messages';
+import MessageList from '@/components/Messages';
+import MessageInterface from '@/components/subcomponents/MessageInterface';
 import Profile from '@/components/Profile';
 
 import Community from '../../components/screens/Community';
 import Therapists from '../../components/screens/Therapists';
 import Appointments from '../../components/screens/Appointments';
+import Settings from '@/components/subcomponents/Settings';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CustomHeader from './CustomHeader';
 import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const MessagesStack = createNativeStackNavigator();
 
 function StackScreens() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Homescreen" component={Home} options={
-        {
-          header: ()=><CustomHeader/>
+    <Stack.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: '#dff2ff',  
         }
-      }/>
+    }}>
+      <Stack.Screen name="Homescreen" component={Home} options={{
+        header: () => <CustomHeader />
+      }} />
       <Stack.Screen name="Therapists" component={Therapists}/>
       <Stack.Screen name="Appointments" component={Appointments} />
       <Stack.Screen name="Community" component={Community} />
     </Stack.Navigator>
   );
 }
+
+function MessagesStackScreens() {
+  return (
+    <MessagesStack.Navigator>
+      <MessagesStack.Screen name="MessageList" component={MessageList} options={{
+        header: ()=><CustomHeader/>
+      }} />
+      <MessagesStack.Screen name="MessageInterface" component={MessageInterface} options={{
+        headerShown: false
+      }} />
+    </MessagesStack.Navigator>
+  );
+}
+
+// Profile stack for Profile and Settings
+const ProfileStack = createNativeStackNavigator();
+
+function ProfileScreens() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen name="Profile" component={Profile} options={{
+        header: ()=> <CustomHeader/>
+      }} />
+      <ProfileStack.Screen name="Settings" component={Settings} options={{
+        headerStyle: {
+          backgroundColor: '#dff2ff'
+        },
+      }} />
+    </ProfileStack.Navigator>
+  );
+}
+
 export default function HomeScreen() {
   return (
-      <Tab.Navigator initialRouteName='Home' screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <Tab.Navigator initialRouteName='Home' screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
 
-          if (route.name === 'Home') {
-            iconName = focused? 'home' : 'home-outline';
-          } else if (route.name === 'Messages') {
-            iconName = focused? 'chatbox-ellipses' : 'chatbox-ellipses-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused? 'person' : 'person-outline';
-          } else if (route.name === 'Resources') {
-            iconName = focused? 'bookmark' : 'bookmark-outline';
-          } else if (route.name === 'AI chat') {
-            iconName = focused? 'chatbubbles' : 'chatbubbles-outline';
-          }
+        if (route.name === 'Home') {
+          iconName = focused ? 'home' : 'home-outline';
+        } else if (route.name === 'Messages') {
+          iconName = focused ? 'chatbox-ellipses' : 'chatbox-ellipses-outline';
+        } else if (route.name === 'Profile') {
+          iconName = focused ? 'person' : 'person-outline';
+        } else if (route.name === 'Resources') {
+          iconName = focused ? 'bookmark' : 'bookmark-outline';
+        } else if (route.name === 'AI chat') {
+          iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
+        }
 
-          
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: '#f9c70c',
-        tabBarInactiveTintColor: 'gray',
-      })}>  
-        <Tab.Screen name='Resources' component={Resources} options={{
-          header: ()=><CustomHeader/>,
-        }}/>
-        <Tab.Screen name='AI chat' component={AIchat} options={{
-          header: ()=><CustomHeader/>,
-        }}/>
-        <Tab.Screen name='Home' component={StackScreens} options={{
-          headerShown: false
-        }}/>
-        <Tab.Screen name='Messages' component={Messages} options={{
-          header: ()=><CustomHeader/>,
-        }}/>
-        <Tab.Screen name='Profile' component={Profile} options={{
-          header: ()=><CustomHeader/>,
-        }}/>
-      </Tab.Navigator>
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: '#f9c70c',
+      tabBarInactiveTintColor: 'gray',
+    })}>
+      <Tab.Screen name='Resources' component={Resources} options={{
+        header: () => <CustomHeader />,
+      }} />
+      <Tab.Screen name='AI chat' component={AIchat} options={{
+        header: () => <CustomHeader />,
+      }} />
+      <Tab.Screen name='Home' component={StackScreens} options={{
+        headerShown: false
+      }} />
+      <Tab.Screen name='Messages' component={MessagesStackScreens} options={{
+        headerShown: false
+      }} />
+      <Tab.Screen name='Profile' component={ProfileScreens} options={{
+        headerShown: false
+      }} />
+    </Tab.Navigator>
   );
-};
+}
