@@ -9,11 +9,19 @@ const Therapists = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  
 
   const therapistsData = [
-    { id: '1', name: 'Dr. John Doe', specialization: 'Psychologist', image: 'https://via.placeholder.com/100' },
-    { id: '2', name: 'Dr. Jane Smith', specialization: 'Counselor', image: 'https://via.placeholder.com/100' },
-    { id: '3', name: 'Dr. Michael Brown', specialization: 'Therapist', image: 'https://via.placeholder.com/100' },
+    { id: '1', name: 'Dr. Sarah Migada', specialization: 'Psychologist with a lot of experience', image: 'https://via.placeholder.com/100' },
+    { id: '2', name: 'Dr. Sarah Migada', specialization: 'Counselor with a lot of experience', image: 'https://via.placeholder.com/100' },
+    { id: '3', name: 'Dr. Sarah Migada', specialization: 'Therapist with a lot of experience', image: 'https://via.placeholder.com/100' },
+    { id: '4', name: 'Dr. Sarah Migada', specialization: 'Therapist with a lot of experience', image: 'https://via.placeholder.com/100' },
+    { id: '5', name: 'Dr. Sarah Migada', specialization: 'Therapist with a lot of experience', image: 'https://via.placeholder.com/100' },
+    { id: '6', name: 'Dr. Sarah Migada', specialization: 'Therapist with experience', image: 'https://via.placeholder.com/100' },
+    { id: '7', name: 'Dr. Sarah Migada', specialization: 'Therapist with experience', image: 'https://via.placeholder.com/100' },
+    { id: '8', name: 'Dr. Sarah Migada', specialization: 'Therapist with experience', image: 'https://via.placeholder.com/100' },
+    { id: '9', name: 'Dr. Sarah Migada', specialization: 'Therapist with experience', image: 'https://via.placeholder.com/100' },
+    { id: '10', name: 'Dr. Sarah Migada', specialization: 'Therapist with experience', image: 'https://via.placeholder.com/100' },
   ];
 
   const filteredTherapists = therapistsData.filter(therapist =>
@@ -172,7 +180,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   bookButton: {
-    backgroundColor: '#4caf50',
+    backgroundColor: '#007AFF',
     padding: 10,
     borderRadius: 8,
   },
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   selectDateButton: {
-    backgroundColor: '#000',
+    backgroundColor: '#00707a',
     padding: 10,
     borderRadius: 8,
     marginTop: 20,
@@ -191,7 +199,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   selectTimeButton: {
-    backgroundColor: '#000',
+    backgroundColor: '#00707a',
     padding: 10,
     borderRadius: 8,
     marginTop: 20,

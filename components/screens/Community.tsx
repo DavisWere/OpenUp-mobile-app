@@ -1,12 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 
 const Community = () => {
-  const communityPosts = [
-    { id: 1, title: 'First Community Post', content: 'This is the content of the first post.' },
-    { id: 2, title: 'Second Community Post', content: 'This is the content of the second post.' },
-    { id: 3, title: 'Third Community Post', content: 'This is the content of the third post.' },
-  ];
+  const [communityPosts, setCommunityPosts] = useState([
+    { id: 1, title: 'Daily Mental Health Tips', content: 'Start your day with a positive affirmation, practice mindfulness for 5 minutes, and remember to take breaks during work. These small steps can help improve your mental well-being.' },
+    { id: 2, title: 'Join Our Upcoming Webinar', content: "We are hosting a webinar on 'Coping with Anxiety' this Friday at 3 PM. Join us to learn effective strategies and share your experiences. Register now!" },
+    { id: 3, title: 'My Journey to Better Mental Health', content: "Hi everyone! I wanted to share my journey of overcoming depression. It's been a tough road, but with therapy and support, I'm doing much better. Let's support each other!" },
+  ]);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [newPostTitle, setNewPostTitle] = useState('');
+  const [newPostContent, setNewPostContent] = useState('');
+
+  const handleCreatePost = () => {
+    const newPost = {
+      id: communityPosts.length + 1,
+      title: newPostTitle,
+      content: newPostContent,
+    };
+    setCommunityPosts([...communityPosts, newPost]);
+    setModalVisible(false);
+    setNewPostTitle('');
+    setNewPostContent('');
+  };
 
   return (
     <View style={styles.container}>
@@ -19,10 +35,34 @@ const Community = () => {
           </View>
         ))}
       </ScrollView>
-      <View style={styles.createNewPost}>
+      <TouchableOpacity style={styles.createNewPost} onPress={() => setModalVisible(true)}>
         <Text style={styles.createPostText}>Create New Post</Text>
-        {/* new post */}
-      </View>
+      </TouchableOpacity>
+
+      <Modal visible={modalVisible} transparent={true} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalHeader}>Create New Post</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Post Title"
+              value={newPostTitle}
+              onChangeText={setNewPostTitle}
+            />
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              placeholder="Post Content"
+              value={newPostContent}
+              onChangeText={setNewPostContent}
+              multiline
+            />
+            <View style={styles.modalButtons}>
+              <Button title="Cancel" onPress={() => setModalVisible(false)} />
+              <Button title="Create" onPress={handleCreatePost} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -68,6 +108,38 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: '#ffffff',
+    padding: 20,
+    borderRadius: 8,
+  },
+  modalHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+  },
+  textArea: {
+    height: 100,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
