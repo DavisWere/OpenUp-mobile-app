@@ -58,7 +58,7 @@ const ProfileStack = createNativeStackNavigator();
 function ProfileScreens() {
   return (
     <ProfileStack.Navigator>
-      <ProfileStack.Screen name="Profile" component={Profile} options={{
+      <ProfileStack.Screen name="MyProfile" component={Profile} options={{
         header: ()=> <CustomHeader/>
       }} />
       <ProfileStack.Screen name="Settings" component={Settings} options={{
