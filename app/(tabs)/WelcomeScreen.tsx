@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import React = require('react');
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native'; 
 import { Picker } from '@react-native-picker/picker'; 
 import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
-import { Ionicons, FontAwesome } from '@expo/vector-icons'; // For icons
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 const WelcomeScreen = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('English');

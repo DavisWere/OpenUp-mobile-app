@@ -1,20 +1,48 @@
-import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, FlatList, Pressable, Alert } from 'react-native';
+import React = require("react");
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  FlatList,
+  Pressable,
+  Alert,
+} from "react-native";
 
 const Games = () => {
   // Sample data for game cards (with different images)
   const gamesData = [
-    { id: '1', title: 'Game 1', image: require('../../assets/images/wrestler.png') },
-    { id: '2', title: 'Game 2', image: require('../../assets/images/puzzle.png') },
-    { id: '3', title: 'Game 3', image: require('../../assets/images/spaceship.png') },
-    { id: '4', title: 'Game 4', image: require('../../assets/images/tictactoe.png') }
+    {
+      id: "1",
+      title: "Game 1",
+      image: require("../../assets/images/wrestler.png"),
+    },
+    {
+      id: "2",
+      title: "Game 2",
+      image: require("../../assets/images/puzzle.png"),
+    },
+    {
+      id: "3",
+      title: "Game 3",
+      image: require("../../assets/images/spaceship.png"),
+    },
+    {
+      id: "4",
+      title: "Game 4",
+      image: require("../../assets/images/tictactoe.png"),
+    },
   ];
 
   // Function to render each game card
   const renderGameCard = ({ item }) => (
     <View style={styles.gameCard}>
       <ImageBackground source={item.image} style={styles.imageBackground}>
-        <Pressable onPress={()=>Alert.alert('Heyy user!!','Games will be added soon 🤩')}>
+        <Pressable
+          onPress={() =>
+            Alert.alert("Heyy user!!", "Games will be added soon 🤩")
+          }
+        >
           <Text style={styles.playText}>Play</Text>
         </Pressable>
       </ImageBackground>
@@ -39,7 +67,7 @@ const Games = () => {
 const styles = StyleSheet.create({
   mainTitle: {
     marginHorizontal: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 18,
     marginTop: 7,
   },
@@ -51,32 +79,31 @@ const styles = StyleSheet.create({
     height: 130,
     width: 150,
     marginHorizontal: 5,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
     borderWidth: 1,
     borderRadius: 10,
-    overflow: 'hidden',
-    backgroundColor: '#fff',
+    overflow: "hidden",
+    backgroundColor: "#fff",
     elevation: 2,
   },
   imageBackground: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   playText: {
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: "500",
     borderRadius: 10,
-    borderColor: '#f9c70c',
+    borderColor: "#f9c70c",
     borderWidth: 1,
     paddingVertical: 2,
     paddingHorizontal: 10,
     margin: 5,
-    color: '#333',
-    backgroundColor: '#dff2ff',
-    textAlign: 'center',
+    color: "#333",
+    backgroundColor: "#dff2ff",
+    textAlign: "center",
   },
 });
 
 export default Games;
-

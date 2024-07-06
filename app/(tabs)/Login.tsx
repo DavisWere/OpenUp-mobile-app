@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +16,14 @@ const Login = ({ navigation }) => {
     alert('To be implemented');
   };
 
+  const handleSignUp = () => {
+    navigation.navigate('SignUp'); // Navigate to SignUp screen
+  };
+
+  const handleHome = () => {
+    navigation.navigate('WelcomeScreen'); // Navigate to SignUp screen
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -22,12 +31,14 @@ const Login = ({ navigation }) => {
     >
       <View style={styles.formContainer}>
         {/* Your Login form content */}
+        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
         <View style={styles.logoContainer}>
           <Image
             source={require('../../assets/images/logo.jpg')}
             style={{ width: 100, height: 100, marginBottom: 20 }}
           />
         </View>
+        </TouchableOpacity>
         <Text style={styles.label}>Username or Email</Text>
         <TextInput
           style={styles.input}
