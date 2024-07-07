@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import React = require('react');
 import { View, Text, StyleSheet, ScrollView, Image, Pressable, Linking } from 'react-native';
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyD2o-pVOO4d3DfIedgPZ2ihgJBt-9W9v-Q'; // Replace with your own API key
+const API_KEY = 'AIzaSyD2o-pVOO4d3DfIedgPZ2ihgJBt-9W9v-Q';
 
 const Resources = () => {
   const [selectedResource, setSelectedResource] = useState('Books');
@@ -25,7 +26,7 @@ const Resources = () => {
         topics = getRandomTopics(9); // Fetch books from 9 random topics
         break;
       case 'Recommended':
-        topics = ['finding happiness', 'building confidence'];
+        topics = ['finding happiness', 'building confidence', 'mental wellness'];
         break;
       default:
         topics = [filter.toLowerCase()];
@@ -51,7 +52,7 @@ const Resources = () => {
         topics = getRandomTopics(3); // Fetch videos from 3 random topics
         break;
       case 'Recommended':
-        topics = ['finding happiness', 'building confidence'];
+        topics = ['finding happiness', 'building confidence', 'mental wellness'];
         break;
       default:
         topics = [filter.toLowerCase()];
