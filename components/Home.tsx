@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React = require("react");
+import React from "react";
 import Games from "./subcomponents/Games";
 import Quicktips from "./subcomponents/Quicktips";
 import { Ionicons } from "@expo/vector-icons";

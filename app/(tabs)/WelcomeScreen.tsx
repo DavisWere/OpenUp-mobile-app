@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import React = require('react');
+import React from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native'; 
 import { Picker } from '@react-native-picker/picker'; 
 import { Linking } from 'react-native';
@@ -50,11 +50,11 @@ const WelcomeScreen = () => {
       </View>
       <Text style={styles.taglineText}>Empowering minds: Healing Together</Text>
       <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
-        <Ionicons name="logo-google" size={24} color="white" style={styles.icon} />
+        <Ionicons name="logo-google" size={24} color="#4285F4" style={styles.icon} />
         <Text style={styles.socialButtonText}>Continue with Google</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.socialButton} onPress={handleFacebookLogin}>
-        <FontAwesome name="facebook-official" size={24} color="white" style={styles.icon} />
+        <FontAwesome name="facebook-official" size={24} color="#4285F4" style={styles.icon} />
         <Text style={styles.socialButtonText}>Continue with Facebook</Text>
       </TouchableOpacity>
       <Text style={styles.orText}>or</Text>
@@ -111,38 +111,45 @@ const styles = StyleSheet.create({
   socialButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4285F4',
+    backgroundColor: '#f5f5f5',
+    borderColor: '#4285F4',
+    borderWidth: 2,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
     marginBottom: 15,
     width: '80%',
-    justifyContent: 'center',
   },
   icon: {
     marginRight: 10,
   },
   socialButtonText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#333',
   },
   orText: {
     fontSize: 18,
     marginVertical: 20,
   },
   emailButton: {
-    backgroundColor: '#dff2ff',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: '#f9c70c',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
     borderRadius: 20,
     marginTop: 10,
     marginBottom: 15,
-    borderColor: '#333',
-    borderWidth: .5
+    // borderColor: '#333',
+    // borderWidth: .5
   },
   emailButtonText: {
     fontSize: 18,
-    color: '#333',
+    color: '#000',
+    textShadowColor: '#fff',
+    textShadowOffset: {
+      width: 1,
+      height: 1
+    },
+    textShadowRadius: 2,
     fontWeight: 'bold'
   },
   loginContainer: {

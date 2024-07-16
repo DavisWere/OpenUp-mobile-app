@@ -1,4 +1,4 @@
-import React = require("react");
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import logo from "../../assets/images/logo.jpg";

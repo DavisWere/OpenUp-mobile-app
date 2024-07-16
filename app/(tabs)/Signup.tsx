@@ -1,8 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Image,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { registerUser } from './axiosConfig';
+import { Picker } from '@react-native-picker/picker';
 
-const Signup = ({ navigation }) => {
+const Signup = () => {
+  const navigation = useNavigation();
+
+  const [userType, setUserType] = useState('Client');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -14,55 +35,106 @@ const Signup = ({ navigation }) => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handleSignup = async () => {
+    try {
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+      const userData = {
+        first_name: firstName,
+        last_name: lastName,
+        username: username,
+        email: email,
+        password: password,
+        usertype: userType, // Add userType to the data sent to the API
+      };
+      const response = await registerUser(userData);
+      console.log('Registration Successful:', response);
+      // Navigate to the next screen or show a success message
+    } catch (error) {
+      console.error('Registration Failed:', error);
+      alert('Registration Failed: ' + error.message); // Show error message to user
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <View style={styles.formContainer}>
-        {/* Your SignUp form content */}
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../../assets/images/logo.jpg')}
-            style={{ width: 100, height: 100, marginBottom: 20 }}
-          />
+        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require("../../assets/images/logo.jpg")}
+              style={{ width: 100, height: 100, marginBottom: 20 }}
+            />
+          </View>
+        </TouchableOpacity>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={userType}
+            onValueChange={(itemValue, itemIndex) => setUserType(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Client" value="Client" />
+            <Picker.Item label="Therapist" value="Therapist" />
+          </Picker>
         </View>
         <TextInput
           style={styles.input}
-          placeholder="Full Name"
-          autoCompleteType="name"
+          placeholder="First Name"
+          autoComplete="name"
           autoCapitalize="words"
           returnKeyType="next"
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Last Name"
+          autoComplete="name"
+          autoCapitalize="words"
+          returnKeyType="next"
+          value={lastName}
+          onChangeText={setLastName}
         />
         <TextInput
           style={styles.input}
           placeholder="Username"
-          autoCompleteType="username"
+          autoComplete="username"
           autoCapitalize="none"
           returnKeyType="next"
+          value={username}
+          onChangeText={setUsername}
         />
         <TextInput
           style={styles.input}
           placeholder="Email"
           keyboardType="email-address"
-          autoCompleteType="email"
+          autoComplete="email"
           autoCapitalize="none"
           returnKeyType="next"
+          value={email}
+          onChangeText={setEmail}
         />
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.passwordInput}
             placeholder="Password"
             secureTextEntry={!showPassword}
-            autoCompleteType="password"
+            autoComplete="password"
             autoCapitalize="none"
             returnKeyType="next"
+            value={password}
+            onChangeText={setPassword}
           />
           <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
             <Ionicons
               name={showPassword ? 'eye-outline' : 'eye-off-outline'}
               size={24}
-              color="#000" // Change color as needed
+              color="#000"
             />
           </TouchableOpacity>
         </View>
@@ -71,30 +143,24 @@ const Signup = ({ navigation }) => {
             style={styles.passwordInput}
             placeholder="Confirm Password"
             secureTextEntry={!showConfirmPassword}
-            autoCompleteType="password"
+            autoComplete="password"
             autoCapitalize="none"
             returnKeyType="go"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
           <TouchableOpacity onPress={toggleConfirmPasswordVisibility} style={styles.eyeIcon}>
             <Ionicons
               name={showConfirmPassword ? 'eye-outline' : 'eye-off-outline'}
               size={24}
-              color="#000" // Change color as needed
+              color="#000"
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.checkboxContainer}>
-          <TouchableOpacity style={styles.checkbox}>
-            <View style={{borderColor: '#333', borderWidth: 1, width: 12, height: 12, marginRight: 10}}></View>
-            <Text style={styles.checkboxText}>Agree to <Text style={{color: 'blue', textDecorationColor: 'blue', textDecorationLine: 'underline', }}>Terms and Conditions</Text></Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.signUpButton}>
-          {/* Your SignUp button component */}
+        <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
         <View style={styles.loginContainer}>
-          {/* Your login navigation */}
           <Text style={styles.loginText}>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.loginLink}>Sign In</Text>
@@ -121,10 +187,21 @@ const styles = StyleSheet.create({
   logoContainer: {
     marginBottom: 20,
   },
+  pickerContainer: {
+    width: '100%',
+    marginBottom: 15,
+    borderColor: '#dff2ff',
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  picker: {
+    width: '100%',
+    height: 50,
+  },
   input: {
     width: '100%',
     backgroundColor: '#fff', // Primary color
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: 15,
     borderRadius: 10,
@@ -150,19 +227,6 @@ const styles = StyleSheet.create({
   },
   eyeIcon: {
     padding: 15,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  checkbox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  checkboxText: {
-    fontSize: 16,
-    
   },
   signUpButton: {
     backgroundColor: '#f9c70c', // Accent color

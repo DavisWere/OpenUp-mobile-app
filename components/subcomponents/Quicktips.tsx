@@ -1,4 +1,4 @@
-import React = require("react");
+import React from "react";
 import { View, FlatList, Image, Text, StyleSheet } from "react-native";
 
 // Mock data (replace with your actual data)
