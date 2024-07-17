@@ -1,14 +1,22 @@
-import { View, Text, StatusBar, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
-import React, { useContext, useState } from 'react';
-import Games from './subcomponents/Games';
-import Quicktips from './subcomponents/Quicktips';
-import { Ionicons } from '@expo/vector-icons';
-import Calendar from '../assets/images/calendar.png';
-import CommunityForum from '../assets/images/community.png';
-import Therapist from '../assets/images/brain.png';
-import { useNavigation } from '@react-navigation/native';
-import { AccessibilityContext } from './subcomponents/AccessibilityContext';
-import Accessibility from './subcomponents/Accessibility';
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import React, { useContext, useState } from "react";
+import Games from "./subcomponents/Games";
+import Quicktips from "./subcomponents/Quicktips";
+import { Ionicons } from "@expo/vector-icons";
+import Calendar from "../assets/images/calendar.png";
+import CommunityForum from "../assets/images/community.png";
+import Therapist from "../assets/images/brain.png";
+import { useNavigation } from "@react-navigation/native";
+import { AccessibilityContext } from "./subcomponents/AccessibilityContext";
+import Accessibility from "./subcomponents/Accessibility";
 
 const Home = () => {
   const navigation = useNavigation();
@@ -23,33 +31,54 @@ const Home = () => {
     <View style={styles.MainContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <TouchableOpacity
-          style={styles.accessibilityIcon}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={{fontSize: 35,}}>♿</Text>
-        </TouchableOpacity>
+        style={styles.accessibilityIcon}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={{ fontSize: 35 }}>♿</Text>
+      </TouchableOpacity>
       <Quicktips />
       <Games />
       <ScrollView style={{ marginVertical: 20 }}>
-        <TouchableOpacity style={styles.screenChoice} onPress={() => navigateToScreen('Therapists')}>
+        <TouchableOpacity
+          style={styles.screenChoice}
+          onPress={() => navigateToScreen("Therapists")}
+        >
           <Image source={Therapist} style={styles.Icons} />
           <View style={styles.screenText}>
             <Text style={[styles.choiceText, { fontSize }]}>Therapists</Text>
-            <Ionicons name='chevron-forward-outline' size={25} color={'#f9c70c'} />
+            <Ionicons
+              name="chevron-forward-outline"
+              size={25}
+              color={"#00707a"}
+            />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.screenChoice} onPress={() => navigateToScreen('Appointments')}>
+        <TouchableOpacity
+          style={styles.screenChoice}
+          onPress={() => navigateToScreen("Appointments")}
+        >
           <Image source={Calendar} style={styles.Icons} />
           <View style={styles.screenText}>
             <Text style={[styles.choiceText, { fontSize }]}>Appointments</Text>
-            <Ionicons name='chevron-forward-outline' size={25} color={'#f9c70c'} />
+            <Ionicons
+              name="chevron-forward-outline"
+              size={25}
+              color={"#00707a"}
+            />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.screenChoice} onPress={() => navigateToScreen('Community')}>
+        <TouchableOpacity
+          style={styles.screenChoice}
+          onPress={() => navigateToScreen("Community")}
+        >
           <Image source={CommunityForum} style={styles.Icons} />
           <View style={styles.screenText}>
             <Text style={[styles.choiceText, { fontSize }]}>Community</Text>
-            <Ionicons name='chevron-forward-outline' size={25} color={'#f9c70c'} />
+            <Ionicons
+              name="chevron-forward-outline"
+              size={25}
+              color={"#00707a"}
+            />
           </View>
         </TouchableOpacity>
         <Accessibility
@@ -64,7 +93,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
@@ -73,30 +102,30 @@ const styles = StyleSheet.create({
     height: 50,
   },
   screenChoice: {
-    flexDirection: 'row',
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
+    flexDirection: "row",
+    backgroundColor: "#f5f5f5",
+    alignItems: "center",
     marginVertical: 5,
     marginHorizontal: 20,
     padding: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
-    justifyContent: 'space-between',
-    borderColor: '#dff2ff',
+    justifyContent: "space-between",
+    borderColor: "#dff2ff",
     borderWidth: 1,
     elevation: 3,
   },
   screenText: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '65%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "65%",
   },
   choiceText: {
-    fontWeight: '600',
+    fontWeight: "600",
     fontSize: 20,
-    color: '#333',
-    textShadowColor: 'lightyellow',
+    color: "#333",
+    textShadowColor: "lightyellow",
     textShadowOffset: {
       width: 2,
       height: 1,
@@ -104,11 +133,11 @@ const styles = StyleSheet.create({
     textShadowRadius: 2,
   },
   accessibilityIcon: {
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 10,
-    position: 'absolute', 
-    borderRadius: 50, 
-    backgroundColor: 'lightgray',
+    position: "absolute",
+    borderRadius: 50,
+    backgroundColor: "lightgray",
     padding: 7,
     top: 1,
     right: 10,

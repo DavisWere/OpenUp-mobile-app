@@ -14,10 +14,10 @@ export const globalStyles = StyleSheet.create({
     color: "#dff2ff",
   },
   Accent: {
-    backgroundColor: "#f9c70c",
+    backgroundColor: "#00707a",
   },
   AccentText: {
-    color: "#f9c70c",
+    color: "#00707a",
   },
   Danger: {
     backgroundColor: "#ff4c4c",

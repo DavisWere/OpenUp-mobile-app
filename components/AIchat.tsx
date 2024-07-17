@@ -1,6 +1,13 @@
-import React = require('react');
-import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
+import React = require("react");
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const AIchat = () => {
   return (
@@ -10,8 +17,12 @@ const AIchat = () => {
       </View>
       <ScrollView style={styles.chatArea}>
         {/* This section will contain the chat messages */}
-        <Text style={styles.chatMessage}>Luna: Hello! How can I assist you today?</Text>
-        <Text style={styles.chatMessageUser}>User: I need help with my project.</Text>
+        <Text style={styles.chatMessage}>
+          Luna: Hello! How can I assist you today?
+        </Text>
+        <Text style={styles.chatMessageUser}>
+          User: I need help with my project.
+        </Text>
       </ScrollView>
       <View style={styles.inputArea}>
         <TouchableOpacity style={styles.micButton}>
@@ -29,41 +40,41 @@ const AIchat = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dff2ff',
+    backgroundColor: "#dff2ff",
   },
   header: {
     paddingTop: 40,
     paddingBottom: 10,
-    backgroundColor: '#f9c70c',
-    alignItems: 'center',
+    backgroundColor: "#00707a",
+    alignItems: "center",
   },
   headerText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   chatArea: {
     flex: 1,
     padding: 10,
   },
   chatMessage: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   chatMessageUser: {
-    backgroundColor: '#dff2ff',
+    backgroundColor: "#dff2ff",
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   inputArea: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
   micButton: {
     marginRight: 10,
@@ -71,13 +82,13 @@ const styles = StyleSheet.create({
   inputBox: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 25,
     paddingHorizontal: 15,
     height: 40,
   },
   sendButton: {
-    backgroundColor: '#f9c70c',
+    backgroundColor: "#00707a",
     padding: 10,
     borderRadius: 25,
     marginLeft: 10,
