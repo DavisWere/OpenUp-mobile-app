@@ -1,13 +1,4 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  FlatList,
-  Pressable,
-  Alert,
-} from "react-native";
+
 import React from "react";
 import {
   View,

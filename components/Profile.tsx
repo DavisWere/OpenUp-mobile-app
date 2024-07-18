@@ -20,6 +20,7 @@ const Profile = () => {
   const [isUSSDModalVisible, setIsUSSDModalVisible] = useState(false);
   const [isWalletModalVisible, setIsWalletModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [logoutAlert, setLogoutAlert] = useState(false)
 
   const toggleDarkMode = () => setIsDarkMode((previousState) => !previousState);
   const toggleUSSDModal = () => setIsUSSDModalVisible(!isUSSDModalVisible);
@@ -33,6 +34,14 @@ const Profile = () => {
   const navigateToSettings = () => {
     navigation.navigate("Settings");
   };
+
+  const handleLogout = () => {
+    setLogoutAlert(true);
+    setTimeout(()=>{
+      // navigation.navigate('Welcome')
+    }, 1000)
+    
+  }
 
   return (
     <View
@@ -99,11 +108,17 @@ const Profile = () => {
           <Ionicons name="settings-outline" size={24} color="#000" />
           <Text style={styles.itemText}>Settings</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={handleLogout}>
           <Ionicons name="log-out-outline" size={24} color="#000" />
           <Text style={styles.itemText}>Logout</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal visible={logoutAlert}  animationType="fade">
+        <View style={styles.logoutAlert}>
+          <Text>Heyyyy</Text>
+        </View>
+      </Modal>
 
       {/* USSD Modal */}
       <Modal visible={isUSSDModalVisible} onBackdropPress={closeModal}>
@@ -219,6 +234,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#007AFF",
   },
+  logoutAlert: {
+    backgroundColor: 'red',
+    padding: 30,
+    
+  }
 });
 
 export default Profile;
