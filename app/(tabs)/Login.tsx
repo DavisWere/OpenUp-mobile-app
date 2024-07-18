@@ -33,8 +33,11 @@ const Login = () => {
       };
       const response = await loginUser(loginData);
       console.log("Login Successful:", response);
+      console.log("Token:", response.access);
       
       await AsyncStorage.setItem('token', response.access);
+
+      navigation.navigate('HomeScreen');
       
     } catch (error) {
       console.error("Login Failed:", error);

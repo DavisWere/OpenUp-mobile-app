@@ -25,7 +25,7 @@ function StackScreens() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Homepage"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
