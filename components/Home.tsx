@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     textShadowOffset: {
       width: 2,
       height: 1,
+      height: 1,
     },
     textShadowRadius: 2,
   },

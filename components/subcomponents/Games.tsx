@@ -8,6 +8,16 @@ import {
   Pressable,
   Alert,
 } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  FlatList,
+  Pressable,
+  Alert,
+} from "react-native";
 
 const Games = () => {
   // Sample data for game cards (with different images)
@@ -100,6 +110,9 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 10,
     margin: 5,
+    color: "#333",
+    backgroundColor: "#dff2ff",
+    textAlign: "center",
     color: "#333",
     backgroundColor: "#dff2ff",
     textAlign: "center",

@@ -28,7 +28,7 @@ const Community = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Community</Text>
       <ScrollView style={styles.postsContainer}>
-        {communityPosts.map(post => (
+        {communityPosts.map((post) => (
           <View key={post.id} style={styles.post}>
             <Text style={styles.postTitle}>{post.title}</Text>
             <Text style={styles.postContent}>{post.content}</Text>
@@ -71,43 +71,75 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   postsContainer: {
     flex: 1,
   },
   post: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 15,
     marginBottom: 10,
     borderRadius: 8,
   },
   postTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   postContent: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   createNewPost: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: 15,
-    backgroundColor: '#00707a',
+    backgroundColor: "#00707a",
     borderRadius: 8,
   },
   createPostText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: '#ffffff',
+    padding: 20,
+    borderRadius: 8,
+  },
+  modalHeader: {
+    fontSize: 20,
+    fontWeight: '',
+    marginBottom: 15,
+  },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+  },
+  textArea: {
+    height: 100,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   modalContainer: {
     flex: 1,

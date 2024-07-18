@@ -15,16 +15,21 @@ import Accessibility from "@/components/subcomponents/Accessibility";
 
 import Settings from "@/components/subcomponents/Settings";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import WelcomeScreen from "./WelcomeScreen";
+import SignUp from "./Signup";
+import Login from "./Login";
 
 import CustomHeader from "./CustomHeader";
 import { Ionicons } from "@expo/vector-icons";
 import { AccessibilityProvider } from "@/components/subcomponents/AccessibilityContext";
+import { createNativeStackNavigator} from '@react-navigation/native-stack'
 
-const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const MessagesStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
+// Stack navigator for screens after login
 function StackScreens() {
   return (
     <Stack.Navigator
@@ -95,7 +100,7 @@ function ProfileScreens() {
   );
 }
 
-export default function HomeScreen() {
+function HomeScreen() {
   return (
     <AccessibilityProvider>
       <Tab.Navigator
@@ -161,5 +166,19 @@ export default function HomeScreen() {
         />
       </Tab.Navigator>
     </AccessibilityProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Welcome"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+    </Stack.Navigator>
   );
 }
