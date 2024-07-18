@@ -12,6 +12,11 @@ import {
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Toast from "react-native-toast-message";
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(); //was not able to identify the source of the defaultProps error so I disabled all logs for now
+
+
 const Therapists = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
