@@ -23,18 +23,7 @@ export const registerUser = async (userData) => {
       console.error('Registration Error:', error.message); // Debugging line
       throw new Error('An unexpected error occurred');
     }
-  }
-};
 
-
-
-// User Login
-export const loginUser = async (loginData) => {
-  try {
-    const response = await api.post('/token/request/', loginData);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
+    
+    
 

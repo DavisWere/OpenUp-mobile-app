@@ -38,7 +38,7 @@ const Profile = () => {
   const handleLogout = () => {
     setLogoutAlert(true);
     setTimeout(()=>{
-      // navigation.navigate('Welcome')
+      navigation.navigate('Welcome')
     }, 1000)
     
   }
@@ -114,11 +114,7 @@ const Profile = () => {
         </TouchableOpacity>
       </View>
 
-      <Modal visible={logoutAlert}  animationType="fade">
-        <View style={styles.logoutAlert}>
-          <Text>Heyyyy</Text>
-        </View>
-      </Modal>
+      
 
       {/* USSD Modal */}
       <Modal visible={isUSSDModalVisible} onBackdropPress={closeModal}>
@@ -237,7 +233,7 @@ const styles = StyleSheet.create({
   logoutAlert: {
     backgroundColor: 'red',
     padding: 30,
-    
+
   }
 });
 
