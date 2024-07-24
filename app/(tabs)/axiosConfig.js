@@ -10,12 +10,13 @@ import api from './api';
 //   }
 // };
 
-export const registerUser = async (userData) => {
+export const registerUser = async(userData) => {
   try {
     const response = await api.post('/user/', userData);
     console.log('Registration Response:', response.data); // Debugging line
     return response.data;
-  } catch (error) {
+  }
+   catch (error) {
     if (error.response) {
       console.error('Registration Error:', error.response); // Debugging line
       throw error.response.data;
@@ -24,6 +25,7 @@ export const registerUser = async (userData) => {
       throw new Error('An unexpected error occurred');
     }
 
-    
-    
+  }
+}
+
 
