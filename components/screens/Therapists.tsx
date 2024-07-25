@@ -31,10 +31,6 @@ const Therapists = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [therapistsData, setTherapistsData] = useState([]);
 
-  // let therapistsData = [
-
-  // ];
-
   useEffect(() => {
     async function fetchTherapists() {
       try {
@@ -49,27 +45,9 @@ const Therapists = () => {
   }, []);
 
   const filteredTherapists = therapistsData.filter((therapist) =>
-    therapist.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+    therapist.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    therapist.last_name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  // async function fetchTherapists(){
-  //   // const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
-  //   const response = await api.get(`${API_BASE_URL}user`);
-  //   therapistsData = response?.data?.results
-  //   // console.log(
-  //   //   response?.data?.results, 'therapist'
-  //   // ); 
-  // } 
-
-  // fetchTherapists()
-
-  // const filteredTherapists = therapistsData.filter((therapist) =>
-  // {
-  //   console.log(therapist);
-    
-  //   therapist.first_name.toLowerCase().includes(searchQuery.toLowerCase())
-
-  // }
-  // );
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
