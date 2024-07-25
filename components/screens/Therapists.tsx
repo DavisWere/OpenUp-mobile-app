@@ -13,8 +13,14 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Toast from "react-native-toast-message";
 
 import { LogBox } from 'react-native';
+// import api from "@/app/(tabs)/api"
+import api from "@/app/(tabs)/api";
+import {API_BASE_URL} from "@/app/(tabs)/constants.js";
+// import {fetchData} from "../../app/(tabs)/axiosConfig"
 
 LogBox.ignoreAllLogs(); //was not able to identify the source of the defaultProps error so I disabled all logs for now
+
+// fetchData('users').then((res)=>console.log(res));
 
 
 const Therapists = () => {
@@ -23,6 +29,15 @@ const Therapists = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  async function fetchTherapists(){
+    const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
+    console.log(
+      response?.data?.results, 'therapist'
+    );
+  }
+
+  fetchTherapists()
 
   const therapistsData = [
     {

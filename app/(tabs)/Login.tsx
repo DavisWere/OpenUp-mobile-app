@@ -14,11 +14,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { loginUser } from "./axiosConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
+import api from "@/app/(tabs)/api"
 
 const Login = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("test_client");
+  const [password, setPassword] = useState("test@123456");
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -31,17 +32,26 @@ const Login = () => {
         username: username,
         password: password,
       };
-      const response = await loginUser(loginData);
+      // const response = await loginUser(loginData);
+      try {
+        const response = await api.post('/token/request/', loginData);
+        await AsyncStorage.setItem("token", response.data.access);
+
+        setTimeout(() => {
+          alert("Login Successful");
+          setTimeout(() => {
+            navigation.navigate("HomeScreen");
+          }, 500);
+        }, 100);
+        
+        return response;
+      } catch (error) {
+        throw error;
+      }
       // console.log("Login Successful:", response);
       // console.log("Token:", response.access);
-      await AsyncStorage.setItem("token", response.access);
 
-      setTimeout(() => {
-        alert("Login Successful");
-        setTimeout(() => {
-          navigation.navigate("HomeScreen");
-        }, 500);
-      }, 100);
+      
     } catch (error) {
       console.error("Login Failed:", error);
     }

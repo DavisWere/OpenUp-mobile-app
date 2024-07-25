@@ -1,4 +1,4 @@
-import api from './api';
+import {api,API_BASE_URL} from './api';
 
 // // User Registration
 // export const registerUser = async (userData) => {
@@ -28,4 +28,22 @@ export const registerUser = async(userData) => {
   }
 }
 
+export const loginUser = async (loginData) => {
+  try {
+    const response = await api.post('/token/request/', loginData);
+    return response;
+  } catch (error) {
+    throw error.response;
+  }
+};
+
+// export const fetchData = async (url) =>{
+//   try {
+//     const response = await api.get(`${API_BASE_URL}/${url}`);
+//     console.log(response);
+//     // return response.data;
+//   } catch (error) {
+//     throw error.response?.data;
+//   }
+// }
 
