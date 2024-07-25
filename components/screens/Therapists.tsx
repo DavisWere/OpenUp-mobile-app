@@ -34,13 +34,12 @@ const Therapists = () => {
   useEffect(() => {
     async function fetchTherapists() {
       try {
-        const response = await api.get(`${API_BASE_URL}user`);
+        const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
         setTherapistsData(response?.data?.results || []);
       } catch (error) {
         console.error("Failed to fetch therapists:", error);
       }
     }
-
     fetchTherapists();
   }, []);
 
