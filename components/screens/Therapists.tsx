@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -29,29 +29,47 @@ const Therapists = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [therapistsData, setTherapistsData] = useState([]);
 
-  async function fetchTherapists(){
-    const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
-    console.log(
-      response?.data?.results, 'therapist'
-    );
-  }
+  // let therapistsData = [
 
-  fetchTherapists()
+  // ];
 
-  const therapistsData = [
-    {
-      id: "1",
-      name: "Dr. Sarah Migada",
-      specialization: "Psychologist with a lot of experience",
-      image: "https://via.placeholder.com/100",
-    },
-    // Add more therapists as needed
-  ];
+  useEffect(() => {
+    async function fetchTherapists() {
+      try {
+        const response = await api.get(`${API_BASE_URL}user`);
+        setTherapistsData(response?.data?.results || []);
+      } catch (error) {
+        console.error("Failed to fetch therapists:", error);
+      }
+    }
+
+    fetchTherapists();
+  }, []);
 
   const filteredTherapists = therapistsData.filter((therapist) =>
-    therapist.name.toLowerCase().includes(searchQuery.toLowerCase())
+    therapist.first_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  // async function fetchTherapists(){
+  //   // const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
+  //   const response = await api.get(`${API_BASE_URL}user`);
+  //   therapistsData = response?.data?.results
+  //   // console.log(
+  //   //   response?.data?.results, 'therapist'
+  //   // ); 
+  // } 
+
+  // fetchTherapists()
+
+  // const filteredTherapists = therapistsData.filter((therapist) =>
+  // {
+  //   console.log(therapist);
+    
+  //   therapist.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+
+  // }
+  // );
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -105,12 +123,12 @@ const Therapists = () => {
   const renderTherapistItem = ({
     item,
   }: {
-    item: { id: string; name: string; specialization: string; image: string };
+    item: { id: string; first_name: string; last_name: string; specialization: string; avatar: string };
   }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.avatar }} style={styles.image} />
       <View style={styles.infoContainer}>
-        <Text style={[styles.name, { color: "#333" }]}>{item.name}</Text>
+        <Text style={[styles.name, { color: "#333" }]}>{item.first_name} {item.last_name}</Text>
         <Text style={styles.specialization}>{item.specialization}</Text>
       </View>
       <TouchableOpacity onPress={handleBookSession} style={styles.bookButton}>
