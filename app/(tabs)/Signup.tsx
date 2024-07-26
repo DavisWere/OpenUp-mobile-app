@@ -7,7 +7,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  Image,
+  Image, ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -26,6 +26,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [therapyLicense, setTherapyLicense] = useState("");
+  const [specialization, setSpecialization] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -47,7 +49,9 @@ const Signup = () => {
         username: username,
         email: email,
         password: password,
-        usertype: userType, // Add userType to the data sent to the API
+        user_type: userType,
+        therapy_license: userType === "therapist" ? therapyLicense : undefined,
+        specialization: userType === "therapist" ? specialization : undefined,
       };
       const response = await registerUser(userData);
       alert("Registration successful! Proceed to login");
@@ -56,126 +60,157 @@ const Signup = () => {
       }, 300);
     } catch (error) {
       console.error("Registration Failed:", error);
-      alert("Registration Failed: " + error.message); // Show error message to user
+      alert("Registration Failed: " + error.message);
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <View style={styles.formContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-          <View style={styles.logoContainer}>
-            <Image
-              source={require("../../assets/images/logo.jpg")}
-              style={{ width: 100, height: 100, marginBottom: 20 }}
+      <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.container}
+      >
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.formContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+              <View style={styles.logoContainer}>
+                <Image
+                    source={require("../../assets/images/logo.jpg")}
+                    style={{ width: 100, height: 100, marginBottom: 20 }}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.pickerContainer}>
+              <Picker
+                  selectedValue={userType}
+                  onValueChange={(itemValue) => setUserType(itemValue)}
+                  style={styles.picker}
+              >
+                <Picker.Item label="Client" value="client" />
+                <Picker.Item label="Therapist" value="therapist" />
+              </Picker>
+            </View>
+            <Text style={styles.label}>First Name</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="First Name"
+                autoComplete="name"
+                autoCapitalize="words"
+                returnKeyType="next"
+                value={firstName}
+                onChangeText={setFirstName}
             />
+            <Text style={styles.label}>Last Name</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Last Name"
+                autoComplete="name"
+                autoCapitalize="words"
+                returnKeyType="next"
+                value={lastName}
+                onChangeText={setLastName}
+            />
+            <Text style={styles.label}>Username</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Username"
+                autoComplete="username"
+                autoCapitalize="none"
+                returnKeyType="next"
+                value={username}
+                onChangeText={setUsername}
+            />
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoComplete="email"
+                autoCapitalize="none"
+                returnKeyType="next"
+                value={email}
+                onChangeText={setEmail}
+            />
+            {userType === "therapist" && (
+                <>
+                  <Text style={styles.label}>Therapist License</Text>
+                  <TextInput
+                      style={styles.input}
+                      placeholder="Therapy License"
+                      autoCapitalize="none"
+                      returnKeyType="next"
+                      value={therapyLicense}
+                      onChangeText={setTherapyLicense}
+                  />
+                  <Text style={styles.label}>Specialization</Text>
+                  <TextInput
+                      style={styles.input}
+                      placeholder="Specialization"
+                      autoCapitalize="words"
+                      returnKeyType="next"
+                      value={specialization}
+                      onChangeText={setSpecialization}
+                  />
+                </>
+            )}
+            <Text style={styles.label}>Password</Text>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                  style={styles.passwordInput}
+                  placeholder="Password"
+                  secureTextEntry={!showPassword}
+                  autoComplete="password"
+                  autoCapitalize="none"
+                  returnKeyType="next"
+                  value={password}
+                  onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                  onPress={togglePasswordVisibility}
+                  style={styles.eyeIcon}
+              >
+                <Ionicons
+                    name={showPassword ? "eye-outline" : "eye-off-outline"}
+                    size={24}
+                    color="#000"
+                />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.label}>Confirm Password</Text>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                  style={styles.passwordInput}
+                  placeholder="Confirm Password"
+                  secureTextEntry={!showConfirmPassword}
+                  autoComplete="password"
+                  autoCapitalize="none"
+                  returnKeyType="go"
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+              />
+              <TouchableOpacity
+                  onPress={toggleConfirmPasswordVisibility}
+                  style={styles.eyeIcon}
+              >
+                <Ionicons
+                    name={showConfirmPassword ? "eye-outline" : "eye-off-outline"}
+                    size={24}
+                    color="#000"
+                />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
+              <Text style={styles.signUpButtonText}>Sign Up</Text>
+            </TouchableOpacity>
+            <View style={styles.loginContainer}>
+              <Text style={styles.loginText}>Already have an account?</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.loginLink}>Sign In</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </TouchableOpacity>
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={userType}
-            onValueChange={(itemValue, itemIndex) => setUserType(itemValue)}
-            style={styles.picker}
-          >
-            <Picker.Item label="Client" value="Client" />
-            <Picker.Item label="Therapist" value="Therapist" />
-          </Picker>
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="First Name"
-          autoComplete="name"
-          autoCapitalize="words"
-          returnKeyType="next"
-          value={firstName}
-          onChangeText={setFirstName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Last Name"
-          autoComplete="name"
-          autoCapitalize="words"
-          returnKeyType="next"
-          value={lastName}
-          onChangeText={setLastName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          autoComplete="username"
-          autoCapitalize="none"
-          returnKeyType="next"
-          value={username}
-          onChangeText={setUsername}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          keyboardType="email-address"
-          autoComplete="email"
-          autoCapitalize="none"
-          returnKeyType="next"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={styles.passwordInput}
-            placeholder="Password"
-            secureTextEntry={!showPassword}
-            autoComplete="password"
-            autoCapitalize="none"
-            returnKeyType="next"
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity
-            onPress={togglePasswordVisibility}
-            style={styles.eyeIcon}
-          >
-            <Ionicons
-              name={showPassword ? "eye-outline" : "eye-off-outline"}
-              size={24}
-              color="#000"
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={styles.passwordInput}
-            placeholder="Confirm Password"
-            secureTextEntry={!showConfirmPassword}
-            autoComplete="password"
-            autoCapitalize="none"
-            returnKeyType="go"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-          />
-          <TouchableOpacity
-            onPress={toggleConfirmPasswordVisibility}
-            style={styles.eyeIcon}
-          >
-            <Ionicons
-              name={showConfirmPassword ? "eye-outline" : "eye-off-outline"}
-              size={24}
-              color="#000"
-            />
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
-          <Text style={styles.signUpButtonText}>Sign Up</Text>
-        </TouchableOpacity>
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.loginLink}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+        </ScrollView>
+
+      </KeyboardAvoidingView>
   );
 };
 
@@ -186,7 +221,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     padding: 20,
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
   },
   formContainer: {
     width: "100%",
@@ -209,7 +244,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    backgroundColor: "#fff", // Primary color
+    backgroundColor: "#fff",
     paddingVertical: 7,
     paddingHorizontal: 20,
     marginBottom: 15,
@@ -222,7 +257,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff", // Primary color
+    backgroundColor: "#fff",
     borderRadius: 5,
     marginBottom: 15,
     borderColor: "lightgray",
@@ -238,7 +273,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   signUpButton: {
-    backgroundColor: "#00707a", // Accent color
+    backgroundColor: "#00707a",
     paddingVertical: 15,
     paddingHorizontal: 50,
     borderRadius: 10,
@@ -247,7 +282,7 @@ const styles = StyleSheet.create({
   signUpButtonText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff", // Primary color
+    color: "#fff",
   },
   loginContainer: {
     flexDirection: "row",
@@ -259,10 +294,25 @@ const styles = StyleSheet.create({
   loginLink: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#333", // Accent color
+    color: "#333",
     marginLeft: 5,
     textDecorationColor: "#333",
     textDecorationLine: "underline",
+  },
+  label: {
+    fontWeight: "bold",
+    marginBottom: 7,
+    color: "#444",
+    alignSelf: "flex-start",
+    fontSize: 18,
+
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    paddingHorizontal: 30,
   },
 });
 

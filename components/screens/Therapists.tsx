@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,8 +13,14 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Toast from "react-native-toast-message";
 
 import { LogBox } from 'react-native';
+// import api from "@/app/(tabs)/api"
+import api from "@/app/(tabs)/api";
+import {API_BASE_URL} from "@/app/(tabs)/constants.js";
+// import {fetchData} from "../../app/(tabs)/axiosConfig"
 
 LogBox.ignoreAllLogs(); //was not able to identify the source of the defaultProps error so I disabled all logs for now
+
+// fetchData('users').then((res)=>console.log(res));
 
 
 const Therapists = () => {
@@ -23,19 +29,23 @@ const Therapists = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [therapistsData, setTherapistsData] = useState([]);
 
-  const therapistsData = [
-    {
-      id: "1",
-      name: "Dr. Sarah Migada",
-      specialization: "Psychologist with a lot of experience",
-      image: "https://via.placeholder.com/100",
-    },
-    // Add more therapists as needed
-  ];
+  useEffect(() => {
+    async function fetchTherapists() {
+      try {
+        const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
+        setTherapistsData(response?.data?.results || []);
+      } catch (error) {
+        console.error("Failed to fetch therapists:", error);
+      }
+    }
+    fetchTherapists();
+  }, []);
 
   const filteredTherapists = therapistsData.filter((therapist) =>
-    therapist.name.toLowerCase().includes(searchQuery.toLowerCase())
+    therapist.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    therapist.last_name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const showDatePicker = () => {
@@ -90,12 +100,12 @@ const Therapists = () => {
   const renderTherapistItem = ({
     item,
   }: {
-    item: { id: string; name: string; specialization: string; image: string };
+    item: { id: string; first_name: string; last_name: string; specialization: string; avatar: string };
   }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.avatar }} style={styles.image} />
       <View style={styles.infoContainer}>
-        <Text style={[styles.name, { color: "#333" }]}>{item.name}</Text>
+        <Text style={[styles.name, { color: "#333" }]}>{item.first_name} {item.last_name}</Text>
         <Text style={styles.specialization}>{item.specialization}</Text>
       </View>
       <TouchableOpacity onPress={handleBookSession} style={styles.bookButton}>
