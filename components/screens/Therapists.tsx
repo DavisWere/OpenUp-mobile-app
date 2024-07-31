@@ -36,6 +36,7 @@ const Therapists = () => {
       try {
         const response = await api.get(`${API_BASE_URL}user?user_type=therapist`);
         setTherapistsData(response?.data?.results || []);
+        console.error(response);
       } catch (error) {
         console.error("Failed to fetch therapists:", error);
       }
