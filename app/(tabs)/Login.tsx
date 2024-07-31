@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
+  Modal,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -21,7 +22,7 @@ const Login = () => {
   const [username, setUsername] = useState("test_client");
   const [password, setPassword] = useState("test@123456");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [isModalVisible, setModalVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -37,12 +38,19 @@ const Login = () => {
         const response = await api.post('/token/request/', loginData);
         await AsyncStorage.setItem("token", response.data.access);
 
+        setModalVisible(true);
+
+        // Navigate to HomeScreen after 200 ms
         setTimeout(() => {
-          alert("Login Successful");
-          setTimeout(() => {
-            navigation.navigate("HomeScreen");
-          }, 500);
-        }, 100);
+          navigation.navigate("HomeScreen");
+        }, 200);
+        
+        // Keep the modal visible for an additional 100 ms after HomeScreen is opened
+        setTimeout(() => {
+          setModalVisible(false); // Hide the modal
+        }, 1000);
+
+
         
         return response;
       } catch (error) {
@@ -107,6 +115,18 @@ const Login = () => {
         <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
           <Text style={styles.signInButtonText}>Sign In</Text>
         </TouchableOpacity>
+        <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text>Login success</Text>
+          </View>
+        </View>
+      </Modal>
         <View style={styles.signUpContainer}>
           <Text style={styles.signUpText}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
@@ -217,6 +237,19 @@ const styles = StyleSheet.create({
     color: "blue",
     textDecorationLine: "underline",
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  }
 });
 
 export default Login;
