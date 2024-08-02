@@ -65,11 +65,11 @@ const Signup = () => {
   };
 
   return (
+    <ScrollView>
       <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.container}
       >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.formContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
               <View style={styles.logoContainer}>
@@ -208,9 +208,9 @@ const Signup = () => {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
 
       </KeyboardAvoidingView>
+      </ScrollView>
   );
 };
 
@@ -220,13 +220,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    // padding: 20,
+    padding: 40,
+  },
+  
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     paddingHorizontal: 30,
+
   },
   formContainer: {
     width: "100%",
-    maxWidth: 400,
     alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20
   },
   logoContainer: {
     marginBottom: 20,
@@ -306,13 +316,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     fontSize: 18,
 
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    paddingHorizontal: 30,
   },
 });
 

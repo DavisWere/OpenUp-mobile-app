@@ -19,8 +19,8 @@ import api from "@/app/(tabs)/api"
 
 const Login = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState("test_client");
-  const [password, setPassword] = useState("test@123456");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -48,7 +48,7 @@ const Login = () => {
         // Keep the modal visible for an additional 100 ms after HomeScreen is opened
         setTimeout(() => {
           setModalVisible(false); // Hide the modal
-        }, 1000);
+        }, 500);
 
 
         
